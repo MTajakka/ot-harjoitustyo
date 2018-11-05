@@ -1,6 +1,6 @@
 # Ot-harjoitustyö
 
-## Viikko1
+## Viikko 01
 Tehtävä | Linkki | Tehty
 --------|--------|-------
 **kometorivin opettelu** | [kometorivi.txt](https://github.com/MTajakka/ot-harjoitustyo/blob/master/laskarit/viikko1/kometorivi.txt) | *tehty*

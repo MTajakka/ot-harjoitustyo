@@ -43,7 +43,7 @@ commit 2636c98e9a172f8a31def57d4ee32365f69acc37
 Author: Markus Tajakka <kakemakekm@gmail.com>
 Date:   Wed Oct 31 11:29:44 2018 +0200
 
-    tiedosto.txt muutettu
+    tiedosto.txt muokattu
 
  tiedosto.txt | 6 +++---
  1 file changed, 3 insertions(+), 3 deletions(-)
@@ -70,7 +70,7 @@ commit 23e3b691431aa08efee7454ff1f02b80316a4cd5
 Author: Markus Tajakka <kakemakekm@gmail.com>
 Date:   Wed Oct 31 11:14:57 2018 +0200
 
-    tiedostoja muutettu
+    tiedostoja muokattu
 
  kolmas.txt | 1 +
  toinen.txt | 1 +

@@ -1,0 +1,105 @@
+commit 62af21fb6f9247f14561d3150a09da8b8d6e7510
+Author: Markus Tajakka <kakemakekm@gmail.com>
+Date:   Wed Oct 31 11:49:36 2018 +0200
+
+    file1 positettu, file2 nimetty file22
+
+ tiedostoja/file2             | 0
+ tiedostoja/{file1 => file22} | 0
+ 2 files changed, 0 insertions(+), 0 deletions(-)
+
+commit 0d1b70fe370e33f7e497c0b7e807078ac16fc2e3
+Author: Markus Tajakka <kakemakekm@gmail.com>
+Date:   Wed Oct 31 11:42:59 2018 +0200
+
+    tiedostoja lisätty
+
+ tiedostoja/file1 | 0
+ tiedostoja/file2 | 0
+ tiedostoja/file3 | 0
+ 3 files changed, 0 insertions(+), 0 deletions(-)
+
+commit ec3327f5be5f62a4682e281505000c7d867ebdf3
+Author: Markus Tajakka <kakemakekm@gmail.com>
+Date:   Wed Oct 31 11:37:04 2018 +0200
+
+    tiedostoja muutettu
+
+ eka.txt    | 2 +-
+ kolmas.txt | 3 ++-
+ 2 files changed, 3 insertions(+), 2 deletions(-)
+
+commit 279088b13c82d8271e8420c8e6a69d63fdd40191
+Author: Markus Tajakka <kakemakekm@gmail.com>
+Date:   Wed Oct 31 11:34:39 2018 +0200
+
+    tiedosto.txt uudelleen nimetty ja toinen.txt poistettu
+
+ tiedosto.txt => eka.txt | 0
+ toinen.txt              | 1 -
+ 2 files changed, 1 deletion(-)
+
+commit 2636c98e9a172f8a31def57d4ee32365f69acc37
+Author: Markus Tajakka <kakemakekm@gmail.com>
+Date:   Wed Oct 31 11:29:44 2018 +0200
+
+    tiedosto.txt muutettu
+
+ tiedosto.txt | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+commit dd300d56a7b5e00c5c1c00191461204a4e9ec475
+Author: Markus Tajakka <kakemakekm@gmail.com>
+Date:   Wed Oct 31 11:21:22 2018 +0200
+
+    tiedosto.txt muokattu
+
+ tiedosto.txt | 6 +++++-
+ 1 file changed, 5 insertions(+), 1 deletion(-)
+
+commit 9b8f1498703cfc00fae04034feb918fc67f29afa
+Author: Markus Tajakka <kakemakekm@gmail.com>
+Date:   Wed Oct 31 11:16:52 2018 +0200
+
+    luotu kansio ja tiedosto
+
+ stuff/neljas.txt | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+commit 23e3b691431aa08efee7454ff1f02b80316a4cd5
+Author: Markus Tajakka <kakemakekm@gmail.com>
+Date:   Wed Oct 31 11:14:57 2018 +0200
+
+    tiedostoja muutettu
+
+ kolmas.txt | 1 +
+ toinen.txt | 1 +
+ 2 files changed, 2 insertions(+)
+
+commit 6bda62ca8f8572d3a90bb7b89a15d4667be79e68
+Author: Markus Tajakka <kakemakekm@gmail.com>
+Date:   Wed Oct 31 11:13:21 2018 +0200
+
+    tiedosto luotu
+
+ kolmas.txt | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+commit a594a42b78a8713edf909b9fca0c92aa68c755e1
+Author: Markus Tajakka <kakemakekm@gmail.com>
+Date:   Wed Oct 31 11:10:34 2018 +0200
+
+    muutos ja lisäys
+
+ tiedosto.txt | 1 +
+ toinen.txt   | 0
+ 2 files changed, 1 insertion(+)
+
+commit 72e029472fd40f8d7bf8f255518b5662cbc88bcd
+Author: Markus Tajakka <kakemakekm@gmail.com>
+Date:   Wed Oct 31 11:07:02 2018 +0200
+
+    tiedosto.txt luotu
+
+ tiedosto.txt | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)

@@ -28,4 +28,18 @@ public class MaksukorttiTest {
         kortti.lataaRahaa(10);
         assertEquals(20, kortti.saldo());
     }    
+    
+    @Test
+    public void saldonVaheneminen() {
+        assertTrue(kortti.otaRahaa(5));
+        assertEquals(5, kortti.saldo());
+    }
+    
+    @Test
+    public void saldonEiMeneNegatiiviseksi() {
+        assertFalse(kortti.otaRahaa(20));
+        assertEquals(10, kortti.saldo());
+    }
+    
+    
 }

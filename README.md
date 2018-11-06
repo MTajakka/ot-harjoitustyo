@@ -8,4 +8,4 @@ Tehtävä | Linkki | Tehty
 
 ## Viikko 02
  - [x] Tehtävä 1
- - [ ] Maksukortti ja kassaPääte: testit kortille
+ - [x] Unicafe

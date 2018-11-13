@@ -10,3 +10,7 @@ Tehtävä | Linkki | Tehty
  - [x] Tehtävä 1
  - [x] Unicafe
  - [x] [Määrittelydokumentti](https://github.com/MTajakka/ot-harjoitustyo/blob/master/dokumentointi/maarittelydokumentti.md)
+
+## Viikko 03
+ - [x] Luokkakaaviot
+ - [x] Sekvenssikaavio

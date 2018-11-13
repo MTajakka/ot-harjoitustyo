@@ -1,5 +1,5 @@
-#BudgetBuddy
-##Käyttäjä
+# BudgetBuddy
+## Käyttäjä
  - [ ] voi luoda käyttäjän
 	 - [ ] voi kirjautua
 	 - [ ] oma lista kuluista
@@ -13,7 +13,7 @@
 	 - [ ] käytettävät rahat
 	 - [ ] tuotteet mihin menee eniten rahaa
 
-###Mahdollisesti lisättävissä
+### Mahdollisesti lisättävissä
  - [ ] kuitin skannaus ja lisäys
 	 - [ ] lukee ostokset ja päivämäärän
 	 - [ ] **Java OCR**

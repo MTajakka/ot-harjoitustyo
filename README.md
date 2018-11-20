@@ -6,6 +6,8 @@ Sovellus on tarkoitettu niille jotka haluavat pitää kirjaa menoistansa, jotta 
 
 ##Dokumentaatio
 
-[Määrittelydokumentti](://github.com/MTajakka/ot-harjoitustyo/blob/master/dokumentointi/maarittelydokumentti.md)
+[Määrittelydokumentti](https://github.com/MTajakka/ot-harjoitustyo/blob/master/dokumentointi/maarittelydokumentti.md)
+
+[Tuntikirjanpito](https://github.com/MTajakka/ot-harjoitustyo/blob/master/dokumentointi/tuntikirjanpito.md)
 
 ##Versiot

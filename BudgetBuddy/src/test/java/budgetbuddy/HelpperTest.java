@@ -27,8 +27,8 @@ public class HelpperTest {
     
     @Test
     public void rightDateFormatParse() throws Exception{
-        String wrongDate = "2018-08-10";
-        Date date = Helpper.yearMonthDayToDate(wrongDate);
+        String rightDate = "2018-08-10";
+        Date date = Helpper.yearMonthDayToDate(rightDate);
 
     }
 

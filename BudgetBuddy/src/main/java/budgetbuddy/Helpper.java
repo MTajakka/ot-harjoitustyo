@@ -10,21 +10,15 @@ import java.util.logging.Logger;
 
 
 public class Helpper {
-    /**
-    *YYYY-MM-DD -> Date
-    */
+
     public static Date yearMonthDayToDate(String date) throws Exception {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         return format.parse(date);
     }
-    
-    /**
-    *Date -> YYYY-MM-DD
-    */
+
     public static String dateToYearMonthDay(Date date) {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         return format.format(date);
-
     }
     
     /*

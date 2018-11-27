@@ -36,13 +36,13 @@ public class ItemTest {
     }
     
     @Test
-    public void utilCreatesAnItem() {
+    public void utilCreatesAnItem() throws Exception {
         Item item = itemCombinedPrice("Item 3", "Item", new Date(2018-1900, 8-1, 10), 649, 11, 3);
         assertEquals("Item 3: 3, 'Item', 2018-08-10, 0.59€, 11", item.toString());
     }
     
     @Test
-    public void utilCreatesAnItemNoId() {
+    public void utilCreatesAnItemNoId() throws Exception {
         Item item = itemCombinedPrice("Item 3", "Item", new Date(2018-1900, 8-1, 10), 649, 11);
         assertEquals("Item 3: -1, 'Item', 2018-08-10, 0.59€, 11", item.toString());
     }

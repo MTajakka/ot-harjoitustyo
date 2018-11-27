@@ -37,7 +37,7 @@ public class Item {
     }
 
     public String getType() {
-        return type;
+        return type.toLowerCase().trim();
     }
 
     public Date getDate() {
@@ -120,8 +120,9 @@ public class Item {
 
     @Override
     public String toString() {
-        return name+": "+id+", '"+type+"', "+Helpper.dateToYearMonthDay(date)+", "
-                +(double)price/100+"€, "+amount;
+        return name + ": " + id + ", '" + type + "', " 
+                + Helpper.dateToYearMonthDay(date) + ", "
+                + (double) price / 100 + "€, " + amount;
     }
     
     

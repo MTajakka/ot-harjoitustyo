@@ -10,4 +10,6 @@ Sovellus on tarkoitettu niille jotka haluavat pitää kirjaa menoistansa, jotta 
 
 [Tuntikirjanpito](https://github.com/MTajakka/ot-harjoitustyo/blob/master/dokumentointi/tuntikirjanpito.md)
 
+[BudetBuddy arkkitehtuuri](https://github.com/MTajakka/ot-harjoitustyo/blob/master/dokumentointi/arkkitehtuuri.md)
+
 ## Versiot

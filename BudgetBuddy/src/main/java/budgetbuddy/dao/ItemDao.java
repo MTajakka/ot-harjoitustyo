@@ -19,9 +19,10 @@ public interface ItemDao {
     boolean add(Item item) throws SQLException;
     boolean add(List<Item> items) throws SQLException;
     
-    Item getItem(int id) throws SQLException;
-    List<Item> getFromTo(Date from, Date to) throws SQLException;
+    Item getItem(int id) throws Exception;
+    List<Item> getFromTo(Date from, Date to) throws Exception;
     
     Set<String> getTypes() throws SQLException;
     Set<Date> getDates() throws Exception;
+    int getMaxId() throws SQLException;
 }

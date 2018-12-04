@@ -10,48 +10,18 @@ import java.util.Set;
 import java.util.Date;
 import java.util.stream.Collectors;
 
-public class DatabaseItemDao implements ItemDao {
-    private boolean connected = false;
-    private Connection connection;
-    private String connectionAdress;
-    private String table;
-    
+public class DatabaseItemDao extends Dao implements ItemDao {
+
     public DatabaseItemDao(String database, String table) throws SQLException {
-        this.connectionAdress = "jdbc:sqlite:" + database;
-        this.table = table;
-        if (!hasTable()) {
-            createTabel();
-        }
+        super(database, table);
     }
     
-    private void connect() throws SQLException {
-        if (!connected) {
-            connection = DriverManager.getConnection(connectionAdress);
-            connected = true; 
-        }
-    }
-    
-    private void disconnect() throws SQLException {
-        if (connected) {
-            connection.close();
-            connected = false;
-        }
-    }
-    
-    private boolean hasTable() throws SQLException {
-        connect();
-        DatabaseMetaData dbm = connection.getMetaData();
-        ResultSet tables = dbm.getTables(null, null, table, null);
-        boolean hasTable = tables.next();
-        disconnect();
-        return hasTable;
-    }
-    
-    
-    private void createTabel() throws SQLException {
+    @Override
+    protected void createTable() throws SQLException {
         connect();
         PreparedStatement stmt = connection.prepareStatement("CREATE TABLE " + table 
-                + " (Name TEXT,"
+                + " (Id INTEGER PRIMARY KEY,"
+                + "Name TEXT,"
                 + "Type TEXT,"
                 + "Date varchar(10),"
                 + "Price INT,"
@@ -61,65 +31,66 @@ public class DatabaseItemDao implements ItemDao {
         disconnect();
     }
     
-    private boolean idEmpty(int id) throws SQLException {
-        PreparedStatement stmt = connection.prepareStatement("SELECT Name FROM " + table + " WHERE ROWID = ?");
-        stmt.setInt(1, id);
-        ResultSet rs = stmt.executeQuery();
-        stmt.close();
-        return !rs.next();
-    }
-    
-    
-    
-    private boolean addItem(Item item) throws SQLException {
-        String addItemSt = "INSERT INTO " + table + " (Name, Type, Date, Price, Amount) " 
-                + "VALUES (?, ?, ?, ?, ?)";
-        String updateItemSt = "UPDATE " + table + " SET Name = ?, Type = ?, Date = ?, Price = ?, Amount = ?   " 
-                + "WHERE rowid = ?";
-        if (connection == null) {
-            return false;
-        }
-        PreparedStatement stmt;
-        if (item.getId() == -1 || idEmpty(item.getId())) {
-            stmt = connection.prepareStatement(addItemSt);
-        } else {
-            stmt = connection.prepareStatement(updateItemSt);
-            stmt.setInt(6, item.getId());
-        }
-        stmt.setString(1, item.getName());
-        stmt.setString(2, item.getType());
-        stmt.setString(3, Helpper.dateToYearMonthDay(item.getDate()));
-        stmt.setInt(4, item.getPrice());
-        stmt.setInt(5, item.getAmount());
-        
-        stmt.executeUpdate();
-        stmt.close();
-        return true;
-    }
-    
     @Override
     public boolean add(Item item) throws SQLException {
-        connect();
-        addItem(item);
-        disconnect();
+        List<Item> items = new ArrayList<>();
+        items.add(item);
+        add(items);
         return true;
     }
 
     @Override
     public boolean add(List<Item> items) throws SQLException {
-        connect();
-        for (Item item : items) {
-            addItem(item);
+        if (items.isEmpty() || items == null) {
+            return false;
         }
+        String addItemSt = "INSERT INTO " + table + " (Name, Type, Date, Price, Amount) "
+                + "VALUES ";
+        for (Item item : items) {
+            addItemSt += "('" + item.getName()
+                    + "', '" + item.getType()
+                    + "', '" + Helpper.dateToYearMonthDay(item.getDate())
+                    + "', " + item.getPrice()
+                    + ", " + item.getAmount() + "), ";
+        }
+        addItemSt = addItemSt.substring(0, addItemSt.length() - 2);
+        
+        connect();
+        PreparedStatement addStmt = connection.prepareStatement(addItemSt);
+        addStmt.executeUpdate();
+        addStmt.close();
         disconnect();
         return true;
     }
     
     @Override
+    public boolean update(Item item) throws SQLException {
+        if (item == null || item.getId() < 1) {
+            return false;
+        }
+        String updateSt = "UPDATE " + table + " SET"
+                + " Name = '" + item.getName()
+                + "', Type = '" + item.getType()
+                + "', Date = '" + Helpper.dateToYearMonthDay(item.getDate())
+                + "', Price = " + item.getPrice()
+                + ", Amount = " + item.getAmount()
+                + " WHERE Id = " + item.getId();
+        connect();
+        PreparedStatement stmt = connection.prepareStatement(updateSt);
+        stmt.executeUpdate();
+        stmt.close();
+        disconnect();
+        return true;
+    }
+    
+    /*
+    *Gets every unique entry on Types column
+    */
+    @Override
     public Set<String> getTypes() throws SQLException {
         Set<String> items = new HashSet<>();
         connect();
-        PreparedStatement stmt = connection.prepareStatement("SELECT DISTINCT Type FROM Items");
+        PreparedStatement stmt = connection.prepareStatement("SELECT DISTINCT Type FROM " + table);
         ResultSet rs = stmt.executeQuery();
         while (rs.next()) {
             items.add(rs.getString(1));
@@ -129,6 +100,9 @@ public class DatabaseItemDao implements ItemDao {
         return items;
     }
     
+    /*
+    *Gets every unique date on Dates column
+    */
     @Override
     public Set<Date> getDates() throws Exception {
         Set<Date> dates = new HashSet<>();
@@ -144,26 +118,12 @@ public class DatabaseItemDao implements ItemDao {
         return dates;
     }
     
-    @Override
-    public int getMaxId() throws SQLException {
-        int max;
-        String getMaxId = "SELECT MAX(ROWID) FROM Items";
-        connect();
-        PreparedStatement stmt = connection.prepareStatement(getMaxId);
-        ResultSet rs = stmt.executeQuery();
-        if (rs.next()) {
-            max = rs.getInt(1);
-        } else {
-            max = -1;
-        }
-        stmt.close();
-        disconnect();
-        return max;
-    }
-    
+    /*
+    *Method to translate item from resultSet
+    */
     private Item itemFromResult(ResultSet rs) throws Exception {
         return new Item(rs.getString("Name"), rs.getString("Type"), Helpper.yearMonthDayToDate(rs.getString("Date")),
-            rs.getInt("Price"), rs.getInt("Amount"), rs.getRow());
+            rs.getInt("Price"), rs.getInt("Amount"), rs.getInt("Id"));
     }
     
     @Override
@@ -172,10 +132,9 @@ public class DatabaseItemDao implements ItemDao {
             return null;
         }
         Item item;
-        String getById = "SELECT * FROM " + table + " WHERE ROWID = ?";
+        String getById = "SELECT * FROM " + table + " WHERE Id = " + id;
         connect();
         PreparedStatement stmt = connection.prepareStatement(getById);
-        stmt.setInt(1, id);
         ResultSet rs = stmt.executeQuery();
         if (rs.next()) {
             item = itemFromResult(rs);
@@ -187,8 +146,11 @@ public class DatabaseItemDao implements ItemDao {
         return item;
     }
     
+    /*
+    *test to see from and to contain date between them 
+    */
     private boolean between(Date date, Date from, Date to) {
-        return date.equals(from) || ( date.after(from) && date.before(to) ) || date.equals(to);
+        return date.equals(from) || (date.after(from) && date.before(to)) || date.equals(to);
     }
 
     @Override
@@ -198,19 +160,19 @@ public class DatabaseItemDao implements ItemDao {
         }
         List<Item> items = new ArrayList<>();
         Set<Date> dates = getDates().stream().filter(d -> between(d, from, to)).collect(Collectors.toSet());
-        String getByDate = "SELECT * FROM " + table + " WHERE Date = ?";
+        String getByDate = "SELECT * FROM " + table + " WHERE Date IN (";
+        for (Date date : dates) {
+            getByDate += "'" + Helpper.dateToYearMonthDay(date) + "', ";
+        }
+        getByDate = getByDate.substring(0, getByDate.length() - 2) + ")";
         connect();
         PreparedStatement stmt = connection.prepareStatement(getByDate);
-        for (Date date : dates) {
-            stmt.setString(1, Helpper.dateToYearMonthDay(date));
-            ResultSet rs = stmt.executeQuery();
-            while (rs.next()) {
-                items.add(itemFromResult(rs));
-            }
+        ResultSet rs = stmt.executeQuery();
+        while (rs.next()) {
+            items.add(itemFromResult(rs));
         }
         stmt.close();
         disconnect();
         return items;
     }
-
 }

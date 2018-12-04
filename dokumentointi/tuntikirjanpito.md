@@ -7,3 +7,4 @@
 |	 | 1	| Item calss luotu ja testattu. SQLite tietokannan luonti aloitettu|	
 | 27.11  | 5	| Tietokannan lisäämminen aloitettu
 | 03.12  | 1	| Tietokannasta haku päivämäärä välillä
+| 04.12  | 7	| Doa luokille luotu superluokka. User Doa luotu. Items Doa refactoroitu. Doat testattu kattavasti. 

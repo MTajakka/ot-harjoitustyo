@@ -15,14 +15,15 @@ import java.util.Set;
  *
  * @author markus
  */
-public interface ItemDao {    
+public interface ItemDao extends DaoInterface {    
     boolean add(Item item) throws SQLException;
     boolean add(List<Item> items) throws SQLException;
+    
+    boolean update(Item item) throws SQLException;
     
     Item getItem(int id) throws Exception;
     List<Item> getFromTo(Date from, Date to) throws Exception;
     
     Set<String> getTypes() throws SQLException;
     Set<Date> getDates() throws Exception;
-    int getMaxId() throws SQLException;
 }

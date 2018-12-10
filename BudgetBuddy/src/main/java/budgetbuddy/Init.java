@@ -15,12 +15,13 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+import javafx.application.Application;
 
 public class Init {
     
     public static void main(String[] args) throws Exception {
 //        SimpleDateFormat format = new SimpleDateFormat("yyyy-DDD");
-        ItemDao items = new DatabaseItemDao("test.db", "Test");
+//        ItemDao items = new DatabaseItemDao("test.db", "Test");
 //        List<Integer> deletable = new ArrayList<>();
 //        for (int i = 1; i <= items.getMaxId(); i++) {
 //            deletable.add(i);
@@ -40,10 +41,13 @@ public class Init {
 //        items.delete(5);
 //        items.add(item);
 //        items.deleteTable();
-        User user1 = new User("user1", "test.db", "table1");
-        UserDao users = new DatabaseUserDao("test.db", "userTest");
-        users.add(user1);
-        System.out.println(users.get(1));
+//        User user1 = new User("User1", "test.db", "table1");
+//        UserDao users = new DatabaseUserDao("test.db", "userTest");
+//        users.add(user1);
+//        System.out.println(users.get(1));
+//        System.out.println(users.containsName("User1"));
+
+        Application.launch(BudgetBudyUi.class);
     }
 }
     

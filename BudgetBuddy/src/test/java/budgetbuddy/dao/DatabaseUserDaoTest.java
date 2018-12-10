@@ -24,7 +24,7 @@ import static org.junit.Assert.*;
  */
 public class DatabaseUserDaoTest {
     private String databasePath;
-    private ItemDao userDB;
+    private UserDao userDB;
     
     public DatabaseUserDaoTest() {
     }
@@ -32,12 +32,20 @@ public class DatabaseUserDaoTest {
     @Before
     public void setUp() throws SQLException {
         databasePath = "target/test.db";
-        userDB = new DatabaseItemDao(databasePath, "userTestTable"); 
+        userDB = new DatabaseUserDao(databasePath, "userTestTable"); 
     }
     
     @After
     public void tearDown() {
         boolean result = new File(databasePath).delete();
+    }
+    
+    private void clearTable() throws SQLException {
+        List<Integer> deletable = new ArrayList<>();
+        for (int i = 1; i <= userDB.getMaxId(); i++) {
+            deletable.add(i);
+        }
+        userDB.delete(deletable);
     }
 
     @Test
@@ -67,5 +75,29 @@ public class DatabaseUserDaoTest {
         assertEquals(0, userDB.getMaxId());
         
         assertTrue(userDB.deleteTable());
+    }
+    
+    @Test
+    public void containsName() throws SQLException {
+        User user = new User("User1", databasePath, "Table1");
+        User user2 = new User("User2", databasePath, "Table2");
+        
+        userDB.add(user);
+        userDB.add(user2);
+        
+        assertTrue(userDB.containsName("User1"));
+        clearTable();
+    }
+    
+    @Test
+    public void containsTable() throws SQLException {
+        User user = new User("User1", databasePath, "Table1");
+        User user2 = new User("User2", databasePath, "Table2");
+        
+        userDB.add(user);
+        userDB.add(user2);
+        
+        assertTrue(userDB.containsTable("Table2"));
+        clearTable();
     }
 }

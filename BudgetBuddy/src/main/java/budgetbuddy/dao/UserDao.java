@@ -18,6 +18,8 @@ public interface UserDao extends DaoInterface {
     
     User get(int id) throws SQLException;
     List<User> getAll() throws SQLException;
+    boolean containsName(String user) throws SQLException;
+    boolean containsTable(String table) throws SQLException;
     
     boolean update(User user) throws SQLException;    
 }

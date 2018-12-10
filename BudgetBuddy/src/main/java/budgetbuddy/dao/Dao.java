@@ -132,6 +132,7 @@ abstract public class Dao implements DaoInterface {
         System.out.println(connection.isClosed());
         PreparedStatement stmt = connection.prepareStatement(dropTable);
         stmt.executeUpdate();
+        stmt.close();
         disconnect();
         return !hasTable();
     }

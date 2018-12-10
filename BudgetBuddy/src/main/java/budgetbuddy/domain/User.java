@@ -8,6 +8,7 @@ package budgetbuddy.domain;
 import budgetbuddy.dao.DatabaseItemDao;
 import budgetbuddy.dao.ItemDao;
 import java.sql.SQLException;
+import java.util.Objects;
 
 /**
  *
@@ -64,4 +65,32 @@ public class User {
     public boolean deleteTable() throws SQLException {
         return items.deleteTable();
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 79 * hash + Objects.hashCode(this.name);
+        hash = 79 * hash + this.id;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final User other = (User) obj;
+        if (!Objects.equals(this.name, other.name)) {
+            return false;
+        }
+        return true;
+    }
+    
+    
 }

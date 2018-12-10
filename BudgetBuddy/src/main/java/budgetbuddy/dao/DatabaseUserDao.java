@@ -94,6 +94,73 @@ public class DatabaseUserDao extends Dao implements UserDao {
         }
         return users;
     }
+    
+    private List<String> getTables(List<Integer> ids) throws SQLException {
+        List<String> tables = new ArrayList<>();
+        String getTablesSt = "SELECT TableNames FROM " + table + " WHERE Id IN (";
+        for (int i = 0; i < ids.size(); i++) {
+            if (i == 0) {
+                getTablesSt += ids.get(i);
+            } else {
+                getTablesSt += ", " + ids.get(i);
+            }
+        }
+        getTablesSt += ")";
+        connect();
+        PreparedStatement stmt = connection.prepareStatement(getTablesSt);
+        ResultSet rs = stmt.executeQuery();
+        while (rs.next()) {
+            String table = rs.getString(1);
+            tables.add(table);
+        }
+        stmt.close();
+        disconnect();
+        return tables;
+    }
+    
+    
+    @Override
+    public boolean delete(List<Integer> ids) throws SQLException {
+        List<String> tables = getTables(ids);
+//        if (tables.isEmpty()) {
+//            return false;
+//        }
+        connect();
+        for (String table : tables) {
+            String dropTable = "DROP TABLE " + table;
+            PreparedStatement stmt = connection.prepareStatement(dropTable);
+            stmt.executeUpdate();
+            stmt.close();
+        }
+        disconnect();
+        return super.delete(ids);
+    }
+    
+    @Override
+    public boolean containsName(String name) throws SQLException {
+        String getUserByName = "SELECT Name FROM " + table
+                + " WHERE Name = '" + name + "'";
+        connect();
+        PreparedStatement stmt = connection.prepareStatement(getUserByName);
+        ResultSet rs = stmt.executeQuery();
+        boolean hasName = rs.next();
+        stmt.close();
+        disconnect();
+        return hasName;
+    }
+    
+    @Override
+    public boolean containsTable(String comparisonTable) throws SQLException {
+        String getTableByName = "SELECT TableNames FROM " + table
+                + " WHERE TableNames = '" + comparisonTable + "'";
+        connect();
+        PreparedStatement stmt = connection.prepareStatement(getTableByName);
+        ResultSet rs = stmt.executeQuery();
+        boolean hasTable = rs.next();
+        stmt.close();
+        disconnect();
+        return hasTable;
+    }
 
     @Override
     public boolean update(User user) throws SQLException {

@@ -15,7 +15,7 @@ public class Item {
 
     public Item(String name, String type, Date date, int price, int amount, int id) {
         this.name = name;
-        this.type = type;
+        this.type = type.trim().toLowerCase();
         this.date = date;
         this.price = price;
         this.amount = amount;
@@ -23,12 +23,7 @@ public class Item {
     }
 
     public Item(String name, String type, Date date, int price, int amount) {
-        this.name = name;
-        this.type = type;
-        this.date = date;
-        this.price = price;
-        this.amount = amount;
-        this.id = -1;
+        this(name, type, date, price, amount, -1);
     }
     
 

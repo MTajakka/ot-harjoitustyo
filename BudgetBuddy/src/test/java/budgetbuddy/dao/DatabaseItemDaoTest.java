@@ -131,4 +131,21 @@ public class DatabaseItemDaoTest {
         assertEquals(dates, datesDB);
         clearTable();
     }
+    
+    @Test
+    public void getFromToTest() throws Exception {
+        Date date1 = Helpper.yearMonthDayToDate("2018-07-01");
+        Date date2 = Helpper.yearMonthDayToDate("2018-08-25");
+        
+        Item item1 = new Item("Item 1", "item", date1, 395, 10);
+        Item item2 = new Item("Item 2", "Item", date2, 595, 5);
+        
+        itemDB.add(item1);
+        itemDB.add(item2);
+        
+        List<Item> items = itemDB.getFromTo(Helpper.yearMonthDayToDate("2018-08-01"), date2);
+        
+        assertFalse(items.contains(item1));
+        assertTrue(items.contains(item2));
+    }
 }

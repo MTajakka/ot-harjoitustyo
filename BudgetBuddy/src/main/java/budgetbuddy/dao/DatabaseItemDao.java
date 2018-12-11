@@ -160,6 +160,9 @@ public class DatabaseItemDao extends Dao implements ItemDao {
         }
         List<Item> items = new ArrayList<>();
         Set<Date> dates = getDates().stream().filter(d -> between(d, from, to)).collect(Collectors.toSet());
+        if (dates.isEmpty()) {
+            return items;
+        }
         String getByDate = "SELECT * FROM " + table + " WHERE Date IN (";
         for (Date date : dates) {
             getByDate += "'" + Helpper.dateToYearMonthDay(date) + "', ";

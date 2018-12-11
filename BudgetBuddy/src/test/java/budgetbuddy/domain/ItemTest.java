@@ -18,13 +18,13 @@ public class ItemTest {
     @Test
     public void itemHoldsAllData() {
         Item item = new Item("Item 3", "Item", new Date(2018-1900, 8-1, 10), 395, 10, 3);
-        assertEquals("Item 3: 3, 'Item', 2018-08-10, 3.95€, 10", item.toString());
+        assertEquals("Item 3: 3, 'item', 2018-08-10, 3.95€, 10", item.toString());
     }
     
     @Test
     public void itemWthoutId() {
         Item item = new Item("Item 3", "Item", new Date(2018-1900, 8-1, 10), 395, 10);
-        assertEquals("Item 3: -1, 'Item', 2018-08-10, 3.95€, 10", item.toString());
+        assertEquals("Item 3: -1, 'item', 2018-08-10, 3.95€, 10", item.toString());
     }
     
     @Test
@@ -38,13 +38,19 @@ public class ItemTest {
     @Test
     public void utilCreatesAnItem() throws Exception {
         Item item = itemCombinedPrice("Item 3", "Item", new Date(2018-1900, 8-1, 10), 649, 11, 3);
-        assertEquals("Item 3: 3, 'Item', 2018-08-10, 0.59€, 11", item.toString());
+        assertEquals("Item 3: 3, 'item', 2018-08-10, 0.59€, 11", item.toString());
     }
     
     @Test
     public void utilCreatesAnItemNoId() throws Exception {
         Item item = itemCombinedPrice("Item 3", "Item", new Date(2018-1900, 8-1, 10), 649, 11);
-        assertEquals("Item 3: -1, 'Item', 2018-08-10, 0.59€, 11", item.toString());
+        assertEquals("Item 3: -1, 'item', 2018-08-10, 0.59€, 11", item.toString());
+    }
+    
+    public void equals() {
+        Item item1 = new Item("Item", "Item", new Date(2018-1900, 8-1, 10), 395, 10, 3);
+        Item item2 = new Item("Item", "Item", new Date(2018-1900, 8-1, 10+10), 395, 10, 3);
+        assertTrue(item1.equals(item2));
     }
     
 }

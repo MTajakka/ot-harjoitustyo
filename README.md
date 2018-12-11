@@ -12,5 +12,7 @@ Sovellus on tarkoitettu niille jotka haluavat pitää kirjaa menoistansa, jotta 
 
 [BudetBuddy arkkitehtuuri](https://github.com/MTajakka/ot-harjoitustyo/blob/master/dokumentointi/arkkitehtuuri.md)
 
+[Käyttöohje](https://github.com/MTajakka/ot-harjoitustyo/blob/master/dokumentointi/kayttoohje.md)
+
 ## Versiot
 [Versio 0.5](https://github.com/MTajakka/ot-harjoitustyo/releases/tag/viikko6)

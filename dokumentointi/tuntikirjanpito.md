@@ -10,5 +10,7 @@
 | 04.12  | 7	| Doa luokille luotu superluokka. User Doa luotu. Items Doa refactoroitu. Doat testattu kattavasti. 
 | 10.12  | 5	| Login screeni luotu osittain
 | 11.12  | 7	| Login tehty toimivaksi. Ostosten lisääminen toimii ja viimeisen kuukauden kulut laskettu
+| 20.12  | 1	| ReWrite Luotu
+| 21.12  | 3	| Ostosten tarkastelu ja muuttaminen ViewItemsWindowilla
 
 Tunteja yhteensä: 31

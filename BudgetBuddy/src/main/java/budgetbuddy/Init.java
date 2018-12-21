@@ -1,7 +1,7 @@
 
 package budgetbuddy;
 
-import budgetbuddy.ui.BudgetBudyUi;
+import budgetbuddy.ui.UiInit;
 import java.util.Date;
 import budgetbuddy.Helpper;
 import budgetbuddy.dao.ItemDao;
@@ -47,7 +47,7 @@ public class Init {
 //        System.out.println(users.get(1));
 //        System.out.println(users.containsName("User1"));
 
-        Application.launch(BudgetBudyUi.class);
+        Application.launch(UiInit.class);
     }
 }
     

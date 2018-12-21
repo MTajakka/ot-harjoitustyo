@@ -82,6 +82,16 @@ public class Helpper {
         return Date.from(date.atStartOfDay(ZoneId.systemDefault()).toInstant());
     }
     
+    /**
+     * Translates java.util.Date to java.LocalDate
+     * @param date Date to be translated
+     * @return translated LocalDate
+     */
+    public static LocalDate dateToLocalDate(Date date) {
+        return date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+    }
+    
+    
     
     
 }

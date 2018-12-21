@@ -11,6 +11,7 @@ import budgetbuddy.dao.ItemDao;
 import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 /**
  *
@@ -43,5 +44,16 @@ public class BudgetManager {
     
     public void add(List<Item> items) throws SQLException {
         itemDB.add(items);
+    }
+    
+    public List<Item> getFromTo(Date from, Date to) throws Exception {
+        return itemDB.getFromTo(from, to);
+    }
+    
+    public boolean update(Item item) throws SQLException {
+        return itemDB.update(item);
+    }
+    public Set<Date> getDates() throws Exception {
+        return itemDB.getDates();
     }
 }

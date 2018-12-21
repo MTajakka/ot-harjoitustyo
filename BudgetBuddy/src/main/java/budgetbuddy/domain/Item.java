@@ -5,7 +5,7 @@ import java.util.Date;
 import java.util.Objects;
 
 
-public class Item {
+public class Item implements Comparable<Item> {
     private String name;
     private String type;
     private Date date;
@@ -109,9 +109,6 @@ public class Item {
         }
         return true;
     }
-    
-
-    
 
     @Override
     public String toString() {
@@ -119,7 +116,20 @@ public class Item {
                 + Helpper.dateToYearMonthDay(date) + ", "
                 + (double) price / 100 + "€, " + amount;
     }
-    
-    
-    
+
+    @Override
+    public int compareTo(Item item) {
+        if (this.date.before(item.date)) {
+            return -1;
+        } else if (this.date.after(item.date)) {
+            return 1;
+        }
+        if (this.id < item.id) {
+            return -1;
+        } else if (this.id > item.id) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
 }

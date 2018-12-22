@@ -12,5 +12,8 @@
 | 11.12  | 7	| Login tehty toimivaksi. Ostosten lisääminen toimii ja viimeisen kuukauden kulut laskettu
 | 20.12  | 1	| ReWrite Luotu
 | 21.12  | 3	| Ostosten tarkastelu ja muuttaminen ViewItemsWindowilla
+| 22.12  | 1	| Tavaroiden poisto tehty
+| 	 | 3	| Suuriman kulun laskeminen tehty
+| 	 | 2	| Ohjelma version 0.9 viimeistely
 
-Tunteja yhteensä: 31
+Tunteja yhteensä: 41

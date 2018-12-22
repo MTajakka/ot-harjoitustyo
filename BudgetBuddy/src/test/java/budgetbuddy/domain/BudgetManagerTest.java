@@ -67,4 +67,19 @@ public class BudgetManagerTest {
         assertEquals(395.0*10/100.0, expences, 0.001);
         clearTable();
     }
+    
+    @Test
+    public void expencesByTypeFromToTest() throws Exception {
+        Date date1 = new Date();
+        
+        Item item1 = new Item("Item 1", "item", date1, 395, 10);
+        Item item2 = new Item("Item 2", "Item", Helpper.addDays(date1, -20), 595, 5);
+        
+        manager.add(item1);
+        manager.add(item2);
+        
+        List<TypePrice> types = manager.expencesByTypeFromTo(Helpper.addDays(date1, -30), date1);
+        assertEquals(595 * 5 + 395 * 10, types.get(0).getPrice());
+        clearTable();
+    }
 }

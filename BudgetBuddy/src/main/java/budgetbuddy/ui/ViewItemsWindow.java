@@ -14,6 +14,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Collections;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.logging.Level;
@@ -26,6 +27,7 @@ import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.DateCell;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
@@ -79,7 +81,7 @@ public class ViewItemsWindow {
         return new ReWrite(String.format("%s", item.getAmount()));
     }
     
-    private static ReWrite InduvidualPlate(Item item) {
+    private static ReWrite induvidualPlate(Item item) {
         double price = (double) item.getPrice() / 100.0;
         return new ReWrite(String.format("%.2f", price));
     }
@@ -125,7 +127,14 @@ public class ViewItemsWindow {
         return date;
     }
     
-    private static GridPane createItemGrid(Date date, BudgetManager manager) {
+    private static GridPane updateItemGrid(GridPane itemGrid, Date date, BudgetManager manager) {
+        Set<Node> removable = new HashSet<>();
+        for (Node child : itemGrid.getChildren()) {
+            removable.add(child);   
+        }
+        itemGrid.getChildren().removeAll(removable);
+        
+        Set<Integer> deletableIds = new HashSet<>();
         List<Item> items;
         try {
             items = manager.getFromTo(date, date);
@@ -133,7 +142,6 @@ public class ViewItemsWindow {
             Alerts.sqlAlert(ex.getMessage());
             items = null;
         }
-        GridPane itemGrid = new GridPane();
         itemGrid.setHgap(10);
         itemGrid.setVgap(3);
         itemGrid.add(new Label("Name"), 0, 0);
@@ -141,6 +149,18 @@ public class ViewItemsWindow {
         itemGrid.add(new Label("Combined €"), 2, 0);
         itemGrid.add(new Label("Amount"), 3, 0);
         itemGrid.add(new Label("Induvidual €"), 4, 0);
+        
+        Button deleteButton = new Button("Delete");
+        deleteButton.setOnAction(eh -> {
+            try {
+                manager.delete(deletableIds);
+            } catch (SQLException ex) {
+                Alerts.sqlAlert(ex.getMessage());
+            }
+            updateItemGrid(itemGrid, date, manager);
+        });
+        itemGrid.add(deleteButton, 5, 0);
+        
         for (int i = 0; i < items.size(); i++) {
             Item item = items.get(i);
             itemGrid.add(namePlate(item, manager), 0, i + 1);
@@ -150,7 +170,7 @@ public class ViewItemsWindow {
             itemGrid.add(combined, 2, i + 1);
             ReWrite amount = amountPlate(item);
             itemGrid.add(amount, 3, i + 1);
-            ReWrite induvidual = InduvidualPlate(item);
+            ReWrite induvidual = induvidualPlate(item);
             itemGrid.add(induvidual, 4, i + 1);
             
             combined.setOnFocusLost(eh -> {
@@ -222,6 +242,16 @@ public class ViewItemsWindow {
                     combined.setText(String.format("%.2f", induvidualValue));
                 }
             });
+            
+            CheckBox delete = new CheckBox();
+            delete.setOnAction(eh -> {
+                if (delete.isSelected()) {
+                    deletableIds.add(item.getId());
+                } else {
+                    deletableIds.remove(item.getId());
+                }
+            });
+            itemGrid.add(delete, 5, i + 1);
         }
         
         
@@ -243,13 +273,14 @@ public class ViewItemsWindow {
         
         BorderPane frame = new BorderPane();
         frame.setPadding(new Insets(10, 10, 10, 20));
-        frame.setPrefSize(400, 300);
+        frame.setPrefSize(550, 400);
+        GridPane itemGrid = new GridPane();
         
         try {
             DatePicker datePicker = createDatePicker(manager.getDates());
             datePicker.setOnAction((ActionEvent eh) -> {
                 Date date = Helpper.loaclDateToDate(datePicker.getValue());
-                GridPane itemGrid = createItemGrid(date, manager);
+                updateItemGrid(itemGrid, date, manager);
                 frame.setCenter(itemGrid);
             });
             
@@ -257,7 +288,7 @@ public class ViewItemsWindow {
             dateInput.getChildren().addAll(new Label("Date: "), datePicker);  
             frame.setTop(dateInput);
             
-            GridPane itemGrid = createItemGrid(Helpper.loaclDateToDate(datePicker.getValue()), manager);
+            updateItemGrid(itemGrid, Helpper.loaclDateToDate(datePicker.getValue()), manager);
             frame.setCenter(itemGrid);
         } catch (Exception ex) {
             Alerts.sqlAlert(ex.getMessage());

@@ -9,9 +9,12 @@ import budgetbuddy.Helpper;
 import budgetbuddy.dao.UserDao;
 import budgetbuddy.dao.ItemDao;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  *
@@ -38,6 +41,20 @@ public class BudgetManager {
         return expences;
     }
     
+    public List<TypePrice> expencesByTypeFromTo(Date from, Date to) throws Exception {
+        List<Item> items = getFromTo(from, to);
+        HashMap<String, Integer> prices = new HashMap<>();
+        for (Item item : items) {
+            int old = prices.getOrDefault(item.getType(), 0);
+            prices.put(item.getType(), old + item.getAmount() * item.getPrice());
+        }
+        List<TypePrice> combinedPrices = new ArrayList<>();
+        for (String type : prices.keySet()) {
+            combinedPrices.add(new TypePrice(type, prices.get(type)));
+        }
+        return combinedPrices.stream().sorted().collect(Collectors.toList());
+    }
+    
     public void add(Item item) throws SQLException {
         itemDB.add(item);
     }
@@ -55,5 +72,13 @@ public class BudgetManager {
     }
     public Set<Date> getDates() throws Exception {
         return itemDB.getDates();
+    }
+    
+    public Set<String> getTypes() throws SQLException {
+        return itemDB.getTypes();
+    }
+    
+    public void delete(Set<Integer> deletable) throws SQLException {
+        itemDB.delete(deletable.stream().sorted().collect(Collectors.toList()));
     }
 }

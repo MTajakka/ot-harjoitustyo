@@ -47,10 +47,19 @@ public class ItemTest {
         assertEquals("Item 3: -1, 'item', 2018-08-10, 0.59€, 11", item.toString());
     }
     
-    public void equals() {
-        Item item1 = new Item("Item", "Item", new Date(2018-1900, 8-1, 10), 395, 10, 3);
-        Item item2 = new Item("Item", "Item", new Date(2018-1900, 8-1, 10+10), 395, 10, 3);
-        assertTrue(item1.equals(item2));
+    @Test
+    public void equalsAndHashTest() {
+        Item item3 = new Item("Item 3", "Item", new Date(2018-1900, 8-1, 10), 395, 10, 3);
+        Item item4 = new Item("Item 3", "Item", new Date(2018-1900, 8-1, 10), 395, 10, 3);
+        
+        assertTrue(item3.equals(item4));
+        assertTrue(item3.hashCode() == item4.hashCode());
     }
+    
+//    public void equals() {
+//        Item item1 = new Item("Item", "Item", new Date(2018-1900, 8-1, 10), 395, 10, 3);
+//        Item item2 = new Item("Item", "Item", new Date(2018-1900, 8-1, 10+10), 395, 10, 3);
+//        assertTrue(item1.equals(item2));
+//    }
     
 }

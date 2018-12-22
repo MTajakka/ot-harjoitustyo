@@ -1,4 +1,4 @@
-# BudgtBuddy
+# BudgetBuddy
 
 Sovelus toimii ostos kirjanpitäjän, joka ketoo kuukauden tulot ja menot. Sovellukselle voi luoda eri käyttäjiä joille on omat kirjanpidot.
 
@@ -18,3 +18,5 @@ Sovellus on tarkoitettu niille jotka haluavat pitää kirjaa menoistansa, jotta 
 
 ## Versiot
 [Versio 0.5](https://github.com/MTajakka/ot-harjoitustyo/releases/tag/viikko6)
+
+[Versio 0.9](https://github.com/MTajakka/ot-harjoitustyo/releases/tag/loppupalautus)

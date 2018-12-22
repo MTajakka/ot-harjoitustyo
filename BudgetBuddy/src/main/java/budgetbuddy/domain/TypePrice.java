@@ -7,8 +7,8 @@ package budgetbuddy.domain;
 
 
 /**
- *
- * @author markus
+ *Combination of type and its price
+ * @author Markus Tajakka
  */
 public class TypePrice implements Comparable<TypePrice> {
     private String type;

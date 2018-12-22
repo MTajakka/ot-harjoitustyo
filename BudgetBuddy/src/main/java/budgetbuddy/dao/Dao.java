@@ -28,7 +28,6 @@ abstract public class Dao implements DaoInterface {
             createTable();
         }
     }
-    
     protected void connect() throws SQLException {
         if (!connected) {
             connection = DriverManager.getConnection(connectionAdress);
@@ -42,7 +41,6 @@ abstract public class Dao implements DaoInterface {
             connected = false;
         }
     }
-    
     protected boolean hasTable() throws SQLException {
         connect();
         DatabaseMetaData dbm = connection.getMetaData();
@@ -85,7 +83,7 @@ abstract public class Dao implements DaoInterface {
         return max;
     }
     
-    /*
+    /**
     *Delets single item using deleteItem method
     */
     public boolean delete(int id) throws SQLException {
@@ -94,7 +92,7 @@ abstract public class Dao implements DaoInterface {
         return delete(ids);
     }
 
-    /*
+    /**
     *Delets multiple items using deleteItem method
     */
     public boolean delete(List<Integer> ids) throws SQLException {

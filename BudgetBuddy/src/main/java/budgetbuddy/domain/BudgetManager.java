@@ -29,6 +29,11 @@ public class BudgetManager {
         this.itemDB = items;
     }
     
+    /**
+     * Returns sum of all items from first day of month to now
+     * @return Sum of all items from first day of month to now
+     * @throws Exception 
+     */
     public double currentMonthsExpences() throws Exception {
         Date now = Helpper.addDays(new Date(), 1);
         Date firstDate = Helpper.firstDayOfMonth(now);
@@ -41,6 +46,13 @@ public class BudgetManager {
         return expences;
     }
     
+    /**
+     * Returns sum of prices between diffrent types between dates from and to
+     * @param from  Earlier Date
+     * @param to    Later Date
+     * @return List of TypePrices which are types whith corresponding sum of expences
+     * @throws Exception 
+     */
     public List<TypePrice> expencesByTypeFromTo(Date from, Date to) throws Exception {
         List<Item> items = getFromTo(from, to);
         HashMap<String, Integer> prices = new HashMap<>();

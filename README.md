@@ -14,7 +14,7 @@ Sovellus on tarkoitettu niille jotka haluavat pitää kirjaa menoistansa, jotta 
 
 [Käyttöohje](https://github.com/MTajakka/ot-harjoitustyo/blob/master/dokumentointi/kayttoohje.md)
 
-[Testausdokumentti]()
+[Testausdokumentti](://github.com/MTajakka/ot-harjoitustyo/blob/master/dokumentointi/testaus.md)
 
 ## Versiot
 [Versio 0.5](https://github.com/MTajakka/ot-harjoitustyo/releases/tag/viikko6)

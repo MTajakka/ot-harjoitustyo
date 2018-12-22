@@ -11,8 +11,8 @@ import java.sql.SQLException;
 import java.util.Objects;
 
 /**
- *
- * @author markus
+ * A class which holds users name and its table
+ * @author Markus Tajakka
  */
 public class User {
     private String name;

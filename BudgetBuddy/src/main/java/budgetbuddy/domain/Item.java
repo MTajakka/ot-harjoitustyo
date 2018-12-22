@@ -4,7 +4,10 @@ import budgetbuddy.Helpper;
 import java.util.Date;
 import java.util.Objects;
 
-
+/**
+ * A class to keep name, type, date, price, amount, and id together
+ * @author Markus Tajakka
+ */
 public class Item /*implements Comparable<Item>*/ {
     private String name;
     private String type;
